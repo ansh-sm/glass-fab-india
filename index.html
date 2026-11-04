@@ -114,6 +114,54 @@
       color: var(--text-light);
     }
 
+    /* ==========================================================================
+       SPECULAR GLASS SHINE & LIGHT-SWEEP VFX (GPU-ACCELERATED)
+       ========================================================================== */
+    .glass-light,
+    .glass-dark,
+    .service-box,
+    .project-card,
+    .project-img,
+    .pillar-card,
+    .process-card,
+    .highlight-card,
+    .about-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Specular diagonal beam of light across glass and image surfaces */
+    .glass-light::after,
+    .glass-dark::after,
+    .service-box::after,
+    .project-card::after,
+    .project-img::after,
+    .pillar-card::after,
+    .process-card::after,
+    .highlight-card::after,
+    .about-card::after {
+      content: '';
+      position: absolute;
+      top: -80%;
+      left: -180%;
+      width: 70%;
+      height: 260%;
+      background: linear-gradient(
+        115deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.08) 25%,
+        rgba(255, 255, 255, 0.55) 50%,
+        rgba(255, 255, 255, 0.08) 75%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(26deg);
+      pointer-events: none;
+      z-index: 6;
+      opacity: 0;
+      transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+      will-change: left, opacity;
+    }
+
     @media (hover: hover) {
       .glass-light {
         transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
@@ -131,6 +179,41 @@
         box-shadow: 0 22px 48px -12px rgba(0, 0, 0, 0.6);
         border-color: rgba(168, 177, 178, 0.45);
       }
+
+      /* Hover Shine Sweep on Desktop */
+      .glass-light:hover::after,
+      .glass-dark:hover::after,
+      .service-box:hover::after,
+      .project-card:hover::after,
+      .project-img:hover::after,
+      .pillar-card:hover::after,
+      .process-card:hover::after,
+      .highlight-card:hover::after,
+      .about-card:hover::after {
+        left: 200%;
+        opacity: 1;
+      }
+
+      .project-card:hover .project-img img,
+      .project-img:hover img {
+        transform: scale(1.05);
+      }
+    }
+
+    /* Active Tap & Click Shine Sweep (Instant response on mobile & clicks) */
+    .glass-light:active::after,
+    .glass-dark:active::after,
+    .service-box:active::after,
+    .project-card:active::after,
+    .project-img:active::after,
+    .pillar-card:active::after,
+    .process-card:active::after,
+    .highlight-card:active::after,
+    .about-card:active::after,
+    .shine-sweep::after {
+      left: 200% !important;
+      opacity: 1 !important;
+      transition: left 0.55s cubic-bezier(0.1, 0.9, 0.2, 1), opacity 0.2s ease !important;
     }
 
     /* Prismatic Refraction Stripe */
@@ -698,6 +781,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      cursor: pointer;
     }
 
     .project-tag {
@@ -731,6 +815,7 @@
       border-radius: 2px;
       overflow: hidden;
       margin-bottom: 12px;
+      cursor: pointer;
     }
 
     .project-img img {
@@ -738,6 +823,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     @media (max-width: 480px) {
@@ -1075,6 +1161,47 @@
       cursor: pointer;
       line-height: 1;
       color: var(--dark-graphite);
+    }
+
+    /* Architectural Image Lightbox Styling */
+    .lightbox-dialog {
+      background: rgba(24, 30, 32, 0.95);
+      border: 1px solid rgba(168, 177, 178, 0.35);
+      border-radius: 4px;
+      max-width: 800px;
+      width: 100%;
+      padding: 24px;
+      color: #FFFFFF;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .lightbox-img-box {
+      width: 100%;
+      height: 380px;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 18px;
+      background: #111516;
+    }
+
+    .lightbox-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      .lightbox-dialog {
+        padding: 16px;
+      }
+      .lightbox-img-box {
+        height: 210px;
+        margin-bottom: 14px;
+      }
     }
 
     /* Toast */
@@ -1611,7 +1738,7 @@
 
         <div class="projects-grid" id="projectContainer">
           <!-- Card 1 -->
-          <div class="project-card glass-dark" data-category="curtain">
+          <div class="project-card glass-dark" data-category="curtain" onclick="openLightbox('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop', 'Commercial Glazed High-Rise', 'High-Rise Tower', 'Semi-Unitized Structural Glazing', 'High-performance low-E glass envelope with integrated vertical sunshades and engineered bracket anchoring.', 'Structural Glazing')">
             <div>
               <div class="project-tag">High-Rise Tower</div>
               <h3>Commercial Glazed High-Rise</h3>
@@ -1623,10 +1750,14 @@
             <div style="font-size: 0.8rem; color: var(--silver-aluminium); line-height: 1.5;">
               High-performance low-E glass envelope with integrated vertical sunshades and engineered bracket anchoring.
             </div>
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-card-dark); display: flex; justify-content: space-between; align-items: center; font-size: 0.74rem; color: var(--silver-aluminium);">
+              <span>Click to inspect</span>
+              <span style="color: var(--copper-oxidized); font-weight: 700;">View & Inquire &rarr;</span>
+            </div>
           </div>
 
           <!-- Card 2 -->
-          <div class="project-card glass-dark" data-category="spider">
+          <div class="project-card glass-dark" data-category="spider" onclick="openLightbox('https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop', 'Corporate Headquarters Atrium', 'Tech Campus Atrium', 'Spider Glazing & Glass Fins', '14-meter double-height entrance using articulated stainless steel spider fittings and laminated clear glass.', 'Spider Glazing')">
             <div>
               <div class="project-tag">Tech Campus Atrium</div>
               <h3>Corporate Headquarters Atrium</h3>
@@ -1638,10 +1769,14 @@
             <div style="font-size: 0.8rem; color: var(--silver-aluminium); line-height: 1.5;">
               14-meter double-height entrance using articulated stainless steel spider fittings and laminated clear glass.
             </div>
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-card-dark); display: flex; justify-content: space-between; align-items: center; font-size: 0.74rem; color: var(--silver-aluminium);">
+              <span>Click to inspect</span>
+              <span style="color: var(--copper-oxidized); font-weight: 700;">View & Inquire &rarr;</span>
+            </div>
           </div>
 
           <!-- Card 3 -->
-          <div class="project-card glass-dark" data-category="louvers">
+          <div class="project-card glass-dark" data-category="louvers" onclick="openLightbox('https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=1200&auto=format&fit=crop', 'Aerodynamic Louver Façade', 'Solar Shading Envelope', 'Architectural Extruded Louvers', 'Custom solar management system reducing heat loads while keeping a clean horizontal architectural rhythm.', 'Architectural Louvers')">
             <div>
               <div class="project-tag">Solar Shading Envelope</div>
               <h3>Aerodynamic Louver Façade</h3>
@@ -1653,10 +1788,14 @@
             <div style="font-size: 0.8rem; color: var(--silver-aluminium); line-height: 1.5;">
               Custom solar management system reducing heat loads while keeping a clean horizontal architectural rhythm.
             </div>
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-card-dark); display: flex; justify-content: space-between; align-items: center; font-size: 0.74rem; color: var(--silver-aluminium);">
+              <span>Click to inspect</span>
+              <span style="color: var(--copper-oxidized); font-weight: 700;">View & Inquire &rarr;</span>
+            </div>
           </div>
 
           <!-- Card 4 -->
-          <div class="project-card glass-dark" data-category="turnkey">
+          <div class="project-card glass-dark" data-category="turnkey" onclick="openLightbox('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop', 'Commercial Building Retrofit', 'Turnkey Modernization', 'ACP, Glazing & Structural Trim', 'Complete building envelope upgrade with sub-framing, insulation, ventilated panels, and new window assemblies.', 'Turnkey Contracting')">
             <div>
               <div class="project-tag">Turnkey Modernization</div>
               <h3>Commercial Building Retrofit</h3>
@@ -1667,6 +1806,10 @@
             </div>
             <div style="font-size: 0.8rem; color: var(--silver-aluminium); line-height: 1.5;">
               Complete building envelope upgrade with sub-framing, insulation, ventilated panels, and new window assemblies.
+            </div>
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-card-dark); display: flex; justify-content: space-between; align-items: center; font-size: 0.74rem; color: var(--silver-aluminium);">
+              <span>Click to inspect</span>
+              <span style="color: var(--copper-oxidized); font-weight: 700;">View & Inquire &rarr;</span>
             </div>
           </div>
         </div>
@@ -1992,6 +2135,34 @@
     </div>
   </div>
 
+  <!-- ==========================================================================
+       ARCHITECTURAL IMAGE & SCOPE LIGHTBOX MODAL
+       ========================================================================== -->
+  <div id="imageLightbox" class="modal-backdrop" onclick="if(event.target===this) closeLightbox()" style="z-index: 1100;">
+    <div class="lightbox-dialog glass-dark">
+      <button class="modal-close" onclick="closeLightbox()" aria-label="Close" style="color: #FFFFFF;">&times;</button>
+      
+      <div class="lightbox-img-box project-img">
+        <img id="lightboxImg" src="" alt="Project Scope Elevation" />
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+        <div style="flex: 1; min-width: 260px;">
+          <div id="lightboxTag" class="project-tag" style="margin-bottom: 4px;">High-Rise Tower</div>
+          <h3 id="lightboxTitle" style="font-size: 1.25rem; color: #FFFFFF; margin-bottom: 6px;">Commercial Glazed High-Rise</h3>
+          <div id="lightboxBadge" class="project-scope-badge" style="margin-bottom: 10px;">Semi-Unitized Structural Glazing</div>
+          <p id="lightboxDesc" style="font-size: 0.86rem; color: var(--silver-aluminium); line-height: 1.6;">
+            High-performance low-E glass envelope with integrated vertical sunshades and engineered bracket anchoring.
+          </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; min-width: 200px;">
+          <button id="lightboxInquireBtn" onclick="inquireFromLightbox()" class="btn btn-petrol" style="width: 100%; padding: 12px 18px; font-size: 0.78rem;">INQUIRE THIS PACKAGE</button>
+          <a href="tel:+919766055380" class="btn btn-outline-light" style="width: 100%; padding: 10px 16px; font-size: 0.76rem; text-align: center;">CALL: +91 9766055380</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div id="toast" class="toast"></div>
 
@@ -2028,7 +2199,43 @@
           });
         });
       }
+
+      // 4. Specular Glass Shine Pulse on Click / Tap across all devices
+      document.addEventListener('pointerdown', (e) => {
+        const el = e.target.closest('.project-card, .project-img, .service-box, .glass-light, .glass-dark, .pillar-card, .process-card, .highlight-card, .about-card');
+        if (!el) return;
+        el.classList.remove('shine-sweep');
+        void el.offsetWidth;
+        el.classList.add('shine-sweep');
+        setTimeout(() => el.classList.remove('shine-sweep'), 650);
+      }, { passive: true });
     });
+
+    // Lightbox Control
+    let activeLightboxScope = '';
+    function openLightbox(imgSrc, title, tag, badge, desc, scopeName) {
+      document.getElementById('lightboxImg').src = imgSrc;
+      document.getElementById('lightboxTitle').textContent = title;
+      document.getElementById('lightboxTag').textContent = tag;
+      document.getElementById('lightboxBadge').textContent = badge;
+      document.getElementById('lightboxDesc').textContent = desc;
+      activeLightboxScope = scopeName || badge;
+      
+      const modal = document.getElementById('imageLightbox');
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('imageLightbox');
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function inquireFromLightbox() {
+      closeLightbox();
+      selectService(activeLightboxScope);
+    }
 
     // Project Filter
     function filterProjects(cat, btn) {
