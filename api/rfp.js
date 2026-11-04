@@ -39,10 +39,11 @@ function isValidPhone(phone) {
   return phoneRegex.test(phone);
 }
 
-// Approved Project Types Whitelist
+// Approved Project Types Whitelist (supports standard & accented spelling)
 const VALID_PROJECT_TYPES = new Set([
   'Commercial Tower',
   'Commercial Tower Façade',
+  'Commercial Tower Facade',
   'Industrial / Manufacturing',
   'Industrial Cladding & Glazing',
   'High-Rise Residential',
@@ -50,7 +51,8 @@ const VALID_PROJECT_TYPES = new Set([
   'Architectural Retail',
   'Architectural Louvers & Fins',
   'Turnkey Package',
-  'Turnkey Façade Package'
+  'Turnkey Façade Package',
+  'Turnkey Facade Package'
 ]);
 
 export default async function handler(req, res) {
