@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
   <title>GLASS FAB INDIA | Architectural Façade Engineering & Glazing</title>
   <meta name="description" content="GLASS FAB INDIA — Specialized B2B contractor for Architectural Façade Engineering, Structural Glazing, Curtain Wall Systems, Spider Glazing, ACP Cladding, Aluminium Fabrication, and Turnkey Packages. Since 2019." />
   
@@ -53,6 +53,7 @@
     html {
       scroll-behavior: smooth;
       -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -1010,8 +1011,8 @@
        ========================================================================== */
     .floating-bar {
       position: fixed;
-      bottom: 16px;
-      right: 16px;
+      bottom: max(16px, env(safe-area-inset-bottom, 16px));
+      right: max(16px, env(safe-area-inset-right, 16px));
       z-index: 500;
       display: flex;
       gap: 8px;
