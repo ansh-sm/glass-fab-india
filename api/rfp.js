@@ -39,11 +39,23 @@ function isValidPhone(phone) {
   return phoneRegex.test(phone);
 }
 
-// Approved Project Types Whitelist (supports standard & accented spelling)
+// Approved Requirement & Service Types Whitelist
 const VALID_PROJECT_TYPES = new Set([
-  'Commercial Tower',
+  'ACP Cladding',
+  'Structural Glazing',
+  'Spider Glazing',
+  'Curtain Wall Systems',
+  'Aluminium Doors & Windows',
+  'Architectural Louvers',
+  'uPVC Fins',
+  'Glass & Aluminium Fabrication',
+  'HVAC Works',
+  'Civil Works',
+  'Interior Works',
+  'Turnkey Contracting',
   'Commercial Tower Façade',
   'Commercial Tower Facade',
+  'Commercial Tower',
   'Industrial / Manufacturing',
   'Industrial Cladding & Glazing',
   'High-Rise Residential',
@@ -52,8 +64,11 @@ const VALID_PROJECT_TYPES = new Set([
   'Architectural Louvers & Fins',
   'Turnkey Package',
   'Turnkey Façade Package',
-  'Turnkey Facade Package'
+  'Turnkey Facade Package',
+  'Other / Multiple Services'
 ]);
+
+const OFFICIAL_RECIPIENT_EMAIL = 'mail.glassfabindia@gmail.com';
 
 export default async function handler(req, res) {
   // Set hardened security response headers
