@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GLASS FAB INDIA — Engineering the Envelope of Modern Architecture</title>
-  <meta name="description" content="Specialized façade, glazing and aluminium execution solutions for contemporary commercial, industrial and architectural developments." />
+  <meta name="description" content="Specialized architectural façade engineering, glazing, aluminium systems, and turnkey building envelope execution solutions." />
   <meta name="keywords" content="Façade Contractor India, Structural Glazing Contractor, Curtain Wall Contractor, ACP Cladding Contractor, Glass and Aluminium Fabrication, Architectural Glazing Solutions, Façade Execution Contractor, Aluminium Doors and Windows, Building Envelope Solutions" />
   <meta name="author" content="GLASS FAB INDIA" />
   <meta property="og:title" content="GLASS FAB INDIA — Engineering the Envelope of Modern Architecture" />
@@ -19,24 +19,22 @@
 
   <style>
     /* ==========================================================================
-       DESIGN PHILOSOPHY: ARCHITECTURAL EDITORIAL + CONTEMPORARY INDUSTRIAL
+       DESIGN PHILOSOPHY: ARCHITECTURAL EDITORIAL + CONTEMPORARY INDUSTRIAL + GLASS VFX
        PALETTE: MINERAL & PETROL
        ========================================================================== */
     :root {
       --bg-porcelain: #F3F1EB;
       --dark-graphite: #22292B;
+      --dark-graphite-card: #1B2123;
       --accent-petrol: #174E50;
       --accent-petrol-hover: #10393B;
       --silver-aluminium: #A8B1B2;
-      --silver-light: rgba(168, 177, 178, 0.25);
       --copper-oxidized: #B77B5C;
       --text-main: #22292B;
       --text-muted: #5A6265;
       --text-light: #F3F1EB;
-      --text-silver: #A8B1B2;
-      --card-white: #FFFFFF;
-      --card-border: rgba(34, 41, 43, 0.08);
-      --card-border-dark: rgba(168, 177, 178, 0.16);
+      --card-border-light: rgba(255, 255, 255, 0.6);
+      --card-border-dark: rgba(168, 177, 178, 0.22);
     }
 
     * {
@@ -66,22 +64,89 @@
       padding: 0 32px;
     }
 
-    /* Architectural Subtle Blueprint Grid Background */
-    .blueprint-bg {
-      background-image: 
-        linear-gradient(rgba(168, 177, 178, 0.12) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(168, 177, 178, 0.12) 1px, transparent 1px);
-      background-size: 48px 48px;
+    /* ==========================================================================
+       GLASS FINISHES, SPECULAR HIGHLIGHTS & LIGHT-SWEEP ANIMATIONS
+       ========================================================================== */
+    .glass-panel-light {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+      border: 1px solid var(--card-border-light);
+      box-shadow: 
+        0 20px 40px -15px rgba(23, 78, 80, 0.07),
+        inset 0 1px 2px rgba(255, 255, 255, 0.95);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .blueprint-bg-dark {
-      background-color: var(--dark-graphite);
-      background-image: 
-        radial-gradient(circle at 15% 20%, rgba(23, 78, 80, 0.35) 0%, transparent 45%),
-        linear-gradient(rgba(168, 177, 178, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(168, 177, 178, 0.04) 1px, transparent 1px);
-      background-size: 100% 100%, 54px 54px, 54px 54px;
-      color: var(--text-light);
+    /* Subtle Architectural Light-Sweep across Glass on Hover */
+    .glass-panel-light::before,
+    .glass-panel-dark::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, 0.45) 50%, transparent 80%);
+      transition: left 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .glass-panel-light:hover::before,
+    .glass-panel-dark:hover::before {
+      left: 150%;
+    }
+
+    .glass-panel-light:hover {
+      transform: translateY(-5px);
+      box-shadow: 
+        0 28px 50px -15px rgba(23, 78, 80, 0.14),
+        inset 0 1px 2px rgba(255, 255, 255, 1);
+      border-color: rgba(23, 78, 80, 0.35);
+    }
+
+    .glass-panel-dark {
+      background: rgba(27, 33, 35, 0.75);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid var(--card-border-dark);
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1.5px rgba(255, 255, 255, 0.15);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-panel-dark:hover {
+      transform: translateY(-4px);
+      border-color: rgba(168, 177, 178, 0.45);
+      box-shadow: 
+        0 30px 60px -15px rgba(0, 0, 0, 0.65),
+        inset 0 1px 2px rgba(255, 255, 255, 0.25);
+    }
+
+    /* Prismatic Refraction Border Glow */
+    .glass-refraction-bar {
+      height: 3px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--accent-petrol) 0%, #357B7E 35%, var(--copper-oxidized) 70%, var(--accent-petrol) 100%);
+      opacity: 0.85;
+    }
+
+    /* Scroll Reveal Transition Helper */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-on-scroll.active {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Logo & Architectural Monogram */
@@ -94,31 +159,35 @@
     }
 
     .logo-symbol {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .logo-symbol svg {
       width: 100%;
       height: 100%;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
     }
 
     .logo-text-title {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 1.22rem;
+      font-size: 1.25rem;
       letter-spacing: 0.04em;
       line-height: 1.1;
       text-transform: uppercase;
     }
 
     .logo-text-subtitle {
-      font-size: 0.64rem;
+      font-size: 0.65rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--silver-aluminium);
-      font-weight: 500;
+      color: var(--accent-petrol);
+      font-weight: 600;
       margin-top: 2px;
     }
 
@@ -127,29 +196,29 @@
       position: sticky;
       top: 0;
       z-index: 200;
-      background: rgba(243, 241, 235, 0.94);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(243, 241, 235, 0.88);
+      backdrop-filter: blur(20px) saturate(190%);
+      -webkit-backdrop-filter: blur(20px) saturate(190%);
       border-bottom: 1px solid rgba(34, 41, 43, 0.08);
       transition: all 0.3s ease;
     }
 
     header.scrolled {
       background: rgba(243, 241, 235, 0.98);
-      box-shadow: 0 4px 20px rgba(34, 41, 43, 0.04);
+      box-shadow: 0 8px 30px rgba(34, 41, 43, 0.06);
     }
 
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 84px;
+      height: 86px;
     }
 
     .nav-menu {
       display: flex;
       align-items: center;
-      gap: 28px;
+      gap: 26px;
       list-style: none;
     }
 
@@ -206,13 +275,14 @@
       background: var(--accent-petrol);
       color: var(--text-light);
       border: 1px solid var(--accent-petrol);
+      box-shadow: 0 4px 14px rgba(23, 78, 80, 0.3);
     }
 
     .btn-petrol:hover {
       background: var(--accent-petrol-hover);
       border-color: var(--accent-petrol-hover);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(23, 78, 80, 0.25);
+      box-shadow: 0 8px 24px rgba(23, 78, 80, 0.45);
     }
 
     .btn-outline-dark {
@@ -224,17 +294,20 @@
     .btn-outline-dark:hover {
       background: var(--dark-graphite);
       color: var(--text-light);
+      transform: translateY(-2px);
     }
 
     .btn-outline-light {
-      background: transparent;
+      background: rgba(255, 255, 255, 0.08);
       color: var(--text-light);
-      border: 1px solid rgba(243, 241, 235, 0.4);
+      border: 1px solid rgba(243, 241, 235, 0.35);
+      backdrop-filter: blur(8px);
     }
 
     .btn-outline-light:hover {
       border-color: var(--text-light);
-      background: rgba(243, 241, 235, 0.08);
+      background: rgba(243, 241, 235, 0.16);
+      transform: translateY(-2px);
     }
 
     .btn-copper {
@@ -245,6 +318,7 @@
 
     .btn-copper:hover {
       background: #9d6447;
+      transform: translateY(-2px);
     }
 
     .btn:disabled {
@@ -253,7 +327,7 @@
       pointer-events: none;
     }
 
-    /* Mobile Menu Toggle */
+    /* Menu Toggle */
     .menu-toggle {
       display: none;
       background: transparent;
@@ -271,7 +345,7 @@
       transition: all 0.3s ease;
     }
 
-    /* Technical Annotations & Badges */
+    /* Badges */
     .badge-editorial {
       display: inline-flex;
       align-items: center;
@@ -281,26 +355,27 @@
       text-transform: uppercase;
       letter-spacing: 0.16em;
       color: var(--accent-petrol);
-      padding: 6px 12px;
-      background: rgba(23, 78, 80, 0.08);
-      border: 1px solid rgba(23, 78, 80, 0.2);
+      padding: 6px 14px;
+      background: rgba(23, 78, 80, 0.09);
+      border: 1px solid rgba(23, 78, 80, 0.25);
     }
 
     .est-badge {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
+      font-size: 0.74rem;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.22em;
       color: var(--silver-aluminium);
-      padding: 6px 14px;
-      border: 1px solid rgba(168, 177, 178, 0.3);
-      background: rgba(34, 41, 43, 0.45);
-      backdrop-filter: blur(8px);
+      padding: 7px 16px;
+      border: 1px solid rgba(168, 177, 178, 0.35);
+      background: rgba(34, 41, 43, 0.6);
+      backdrop-filter: blur(12px);
       display: inline-block;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
-    /* Section Global Headers */
+    /* Section Headers */
     .section-eyebrow {
       display: block;
       font-size: 0.76rem;
@@ -333,15 +408,15 @@
     }
 
     .section-desc.light {
-      color: var(--text-silver);
+      color: var(--silver-aluminium);
     }
 
     /* ==========================================================================
-       SECTION 01: HERO EXPERIENCE
+       HERO SECTION (GLASS REFLECTIONS & ARCHITECTURAL DEPTH)
        ========================================================================== */
     .hero-section {
       position: relative;
-      min-height: calc(100vh - 84px);
+      min-height: calc(100vh - 86px);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -351,26 +426,30 @@
       overflow: hidden;
     }
 
-    .hero-bg-overlay {
+    .hero-bg-photo {
       position: absolute;
       inset: 0;
       background: 
-        linear-gradient(135deg, rgba(34, 41, 43, 0.94) 0%, rgba(23, 78, 80, 0.65) 60%, rgba(34, 41, 43, 0.88) 100%),
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600"><rect x="0" y="0" width="600" height="600" fill="%2322292B"/><path d="M 0 0 L 600 600 M 600 0 L 0 600 M 300 0 L 300 600 M 0 300 L 600 300" stroke="%2330383B" stroke-width="1.2"/></svg>');
+        linear-gradient(135deg, rgba(34, 41, 43, 0.94) 0%, rgba(23, 78, 80, 0.75) 60%, rgba(34, 41, 43, 0.92) 100%),
+        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop');
       background-size: cover;
-      opacity: 0.95;
+      background-position: center;
+      opacity: 0.92;
       z-index: 1;
+      transform: scale(1.02);
+      transition: transform 12s ease-out;
     }
 
-    .hero-wireframe-art {
+    .hero-section:hover .hero-bg-photo {
+      transform: scale(1.06);
+    }
+
+    .hero-glass-reflection {
       position: absolute;
-      right: 0;
-      top: 10%;
-      width: 55%;
-      height: 80%;
-      opacity: 0.22;
-      z-index: 2;
+      inset: 0;
+      background: radial-gradient(circle at 75% 30%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
       pointer-events: none;
+      z-index: 2;
     }
 
     .hero-content {
@@ -397,6 +476,7 @@
       letter-spacing: -0.03em;
       margin-bottom: 24px;
       color: var(--text-light);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
     .hero-subheading {
@@ -419,15 +499,18 @@
       z-index: 10;
       margin-top: 60px;
       padding-top: 32px;
-      border-top: 1px solid var(--card-border-dark);
+      border-top: 1px solid rgba(168, 177, 178, 0.2);
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 24px;
     }
 
     .hero-stat-card {
-      padding-left: 16px;
-      border-left: 2px solid var(--accent-petrol);
+      padding: 16px 20px;
+      background: rgba(34, 41, 43, 0.5);
+      backdrop-filter: blur(12px);
+      border-left: 3px solid var(--accent-petrol);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .hero-stat-title {
@@ -477,41 +560,14 @@
     }
 
     .intro-card-architectural {
-      background: var(--card-white);
-      border: 1px solid var(--card-border);
       padding: 44px 38px;
-      box-shadow: 0 16px 40px rgba(34, 41, 43, 0.05);
       position: relative;
-    }
-
-    .intro-card-architectural::before {
-      content: '';
-      position: absolute;
-      top: -1px;
-      left: 30px;
-      width: 48px;
-      height: 3px;
-      background: var(--accent-petrol);
-    }
-
-    .intro-card-architectural h4 {
-      font-size: 1.15rem;
-      margin-bottom: 16px;
-      color: var(--dark-graphite);
-      text-transform: uppercase;
-    }
-
-    .intro-card-architectural p {
-      font-size: 0.94rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-      margin-bottom: 24px;
     }
 
     .target-sectors-box {
       padding: 18px;
-      background: rgba(243, 241, 235, 0.7);
-      border-left: 2px solid var(--accent-petrol);
+      background: rgba(243, 241, 235, 0.85);
+      border-left: 3px solid var(--accent-petrol);
       font-size: 0.84rem;
       color: var(--dark-graphite);
       font-weight: 500;
@@ -519,12 +575,12 @@
     }
 
     /* ==========================================================================
-       SECTION 03: SERVICES DIRECTORY (ALL 12 SERVICES)
+       SECTION 03: SERVICES DIRECTORY (ALL 12 DETAILED SERVICES)
        ========================================================================== */
     .services-section {
       padding: 120px 0;
       background: #FFFFFF;
-      border-top: 1px solid var(--card-border);
+      border-top: 1px solid rgba(34, 41, 43, 0.08);
     }
 
     .services-header-row {
@@ -543,22 +599,11 @@
     }
 
     .service-card-item {
-      background: var(--bg-porcelain);
-      border: 1px solid var(--card-border);
       padding: 38px 32px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: relative;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
-    }
-
-    .service-card-item:hover {
-      background: var(--card-white);
-      border-color: var(--accent-petrol);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 36px rgba(23, 78, 80, 0.08);
     }
 
     .service-card-number {
@@ -592,7 +637,7 @@
     .service-card-footer {
       margin-top: 26px;
       padding-top: 18px;
-      border-top: 1px solid rgba(34, 41, 43, 0.06);
+      border-top: 1px solid rgba(34, 41, 43, 0.08);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -604,7 +649,7 @@
     }
 
     /* ==========================================================================
-       SECTION 04: FEATURED PROJECTS & EXECUTION
+       SECTION 04: FEATURED PROJECTS & PORTFOLIO
        ========================================================================== */
     .projects-section {
       padding: 120px 0;
@@ -620,34 +665,49 @@
     }
 
     .project-card {
-      background: #1B2123;
-      border: 1px solid var(--card-border-dark);
       padding: 32px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .project-card:hover {
-      border-color: var(--silver-aluminium);
-      transform: translateY(-3px);
     }
 
     .project-card.featured-large {
       grid-column: span 7;
-      min-height: 440px;
+      min-height: 480px;
     }
 
     .project-card.featured-medium {
       grid-column: span 5;
-      min-height: 440px;
+      min-height: 480px;
     }
 
     .project-card.featured-standard {
       grid-column: span 4;
-      min-height: 380px;
+      min-height: 400px;
+    }
+
+    .project-image-box {
+      width: 100%;
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      margin: 18px 0;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .project-card.featured-large .project-image-box {
+      height: 260px;
+    }
+
+    .project-image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .project-card:hover .project-image-box img {
+      transform: scale(1.08);
     }
 
     .project-tag {
@@ -677,23 +737,6 @@
       letter-spacing: 0.06em;
     }
 
-    .project-visual-mock {
-      width: 100%;
-      height: 200px;
-      background: rgba(34, 41, 43, 0.6);
-      border: 1px dashed rgba(168, 177, 178, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 18px 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-card.featured-large .project-visual-mock {
-      height: 240px;
-    }
-
     /* ==========================================================================
        SECTION 05: WHY CHOOSE GLASS FAB INDIA (6 PILLARS)
        ========================================================================== */
@@ -710,11 +753,8 @@
     }
 
     .pillar-box {
-      background: var(--card-white);
-      border: 1px solid var(--card-border);
-      border-top: 3px solid var(--accent-petrol);
       padding: 36px 32px;
-      box-shadow: 0 10px 30px rgba(34, 41, 43, 0.03);
+      border-top: 3px solid var(--accent-petrol);
     }
 
     .pillar-num {
@@ -746,7 +786,7 @@
     .capabilities-section {
       padding: 120px 0;
       background: #FFFFFF;
-      border-top: 1px solid var(--card-border);
+      border-top: 1px solid rgba(34, 41, 43, 0.08);
     }
 
     .cap-matrix {
@@ -758,14 +798,11 @@
 
     .cap-item {
       padding: 28px;
-      background: var(--bg-porcelain);
-      border: 1px solid var(--card-border);
       transition: all 0.25s ease;
     }
 
     .cap-item:hover {
       border-color: var(--accent-petrol);
-      background: var(--card-white);
     }
 
     .cap-item h4 {
@@ -784,7 +821,6 @@
 
     .profile-download-banner {
       margin-top: 60px;
-      background: var(--dark-graphite);
       color: var(--text-light);
       padding: 44px 40px;
       display: flex;
@@ -801,7 +837,7 @@
     .process-section {
       padding: 120px 0;
       background: var(--bg-porcelain);
-      border-top: 1px solid var(--card-border);
+      border-top: 1px solid rgba(34, 41, 43, 0.08);
     }
 
     .process-row {
@@ -812,8 +848,6 @@
     }
 
     .process-column {
-      background: var(--card-white);
-      border: 1px solid var(--card-border);
       padding: 32px 24px;
       display: flex;
       flex-direction: column;
@@ -838,7 +872,7 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 2.4rem;
       font-weight: 800;
-      color: rgba(23, 78, 80, 0.18);
+      color: rgba(23, 78, 80, 0.22);
       line-height: 1;
       margin-bottom: 14px;
     }
@@ -863,7 +897,7 @@
     .partners-section {
       padding: 100px 0;
       background: #FFFFFF;
-      border-top: 1px solid var(--card-border);
+      border-top: 1px solid rgba(34, 41, 43, 0.08);
     }
 
     .audience-grid {
@@ -874,8 +908,6 @@
     }
 
     .audience-card {
-      border: 1px solid var(--card-border);
-      background: var(--bg-porcelain);
       padding: 28px 24px;
       display: flex;
       align-items: center;
@@ -885,7 +917,7 @@
     .audience-icon {
       width: 44px;
       height: 44px;
-      background: rgba(23, 78, 80, 0.1);
+      background: rgba(23, 78, 80, 0.12);
       color: var(--accent-petrol);
       display: flex;
       align-items: center;
@@ -903,7 +935,7 @@
     }
 
     /* ==========================================================================
-       SECTION 09 & 11: PROJECT ENQUIRY & CONTACT EXPERIENCE
+       SECTION 09 & 11: PROJECT ENQUIRY & CONTACT EXPERIENCE (WITH REAL DETAILS)
        ========================================================================== */
     .contact-section {
       padding: 120px 0;
@@ -940,23 +972,30 @@
     }
 
     .direct-contact-value {
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       font-weight: 600;
       color: var(--text-light);
       text-decoration: none;
-      display: inline-block;
-      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
     }
 
     .direct-contact-value:hover {
       color: var(--silver-aluminium);
+      transform: translateX(4px);
+    }
+
+    .contact-actions-row {
+      display: flex;
+      gap: 14px;
+      margin-top: 18px;
+      flex-wrap: wrap;
     }
 
     .contact-form-card {
-      background: #1B2123;
-      border: 1px solid var(--card-border-dark);
       padding: 44px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     }
 
     .form-grid-2 {
@@ -984,14 +1023,14 @@
     .form-group select,
     .form-group textarea {
       width: 100%;
-      background: #252D30;
-      border: 1px solid rgba(168, 177, 178, 0.2);
+      background: rgba(37, 45, 48, 0.8);
+      border: 1px solid rgba(168, 177, 178, 0.25);
       color: var(--text-light);
       padding: 13px 15px;
       font-size: 0.92rem;
       font-family: inherit;
       border-radius: 1px;
-      transition: border-color 0.2s ease;
+      transition: all 0.2s ease;
     }
 
     .form-group input:focus,
@@ -999,10 +1038,10 @@
     .form-group textarea:focus {
       outline: none;
       border-color: var(--accent-petrol);
-      background: #2C3538;
+      background: rgba(44, 53, 56, 0.95);
+      box-shadow: 0 0 12px rgba(23, 78, 80, 0.4);
     }
 
-    /* Anti-Bot Honeypot */
     .hp-trap {
       position: absolute;
       left: -9999px;
@@ -1010,6 +1049,44 @@
       pointer-events: none;
       width: 0;
       height: 0;
+    }
+
+    /* Floating WhatsApp Quick Action Button */
+    .floating-whatsapp-btn {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      z-index: 150;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      background: rgba(23, 78, 80, 0.92);
+      color: #FFFFFF;
+      text-decoration: none;
+      border-radius: 40px;
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .floating-whatsapp-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      background: #10393B;
+      box-shadow: 0 16px 36px rgba(23, 78, 80, 0.5);
+    }
+
+    .whatsapp-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #25D366;
+      box-shadow: 0 0 8px #25D366;
     }
 
     /* ==========================================================================
@@ -1073,7 +1150,8 @@
       position: fixed;
       inset: 0;
       background: rgba(16, 20, 22, 0.88);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       z-index: 300;
       align-items: center;
       justify-content: center;
@@ -1085,16 +1163,13 @@
     }
 
     .modal-box {
-      background: var(--dark-graphite);
       color: var(--text-light);
-      border: 1px solid var(--card-border-dark);
       max-width: 680px;
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
       padding: 44px;
       position: relative;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
     }
 
     .modal-close-btn {
@@ -1133,7 +1208,7 @@
       opacity: 1;
     }
 
-    /* Responsive Breakpoints */
+    /* Responsive */
     @media (max-width: 1024px) {
       .nav-menu {
         display: none;
@@ -1187,13 +1262,19 @@
         align-items: flex-start;
         gap: 16px;
       }
+      .floating-whatsapp-btn {
+        bottom: 16px;
+        left: 16px;
+        padding: 10px 16px;
+        font-size: 0.76rem;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- ==========================================================================
-       HEADER & NAVIGATION (Top-Left Logo + Complete Name)
+       HEADER & NAVIGATION (Top-Left Logo + Complete Name + Phone/Email Direct Access)
        ========================================================================== -->
   <header id="siteHeader">
     <div class="container">
@@ -1225,6 +1306,11 @@
           <li><a href="#process">Our Process</a></li>
           <li><a href="#contact">Contact</a></li>
           <li>
+            <a href="tel:+919766055380" style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--accent-petrol); font-weight: 700; text-decoration: none;">
+              📞 +91 9766055380
+            </a>
+          </li>
+          <li>
             <button onclick="openRfpModal()" class="btn btn-petrol" style="padding: 11px 22px; font-size: 0.76rem;">DISCUSS A PROJECT</button>
           </li>
         </ul>
@@ -1240,7 +1326,7 @@
 
   <!-- Mobile Drawer -->
   <div id="mobileDrawer" style="display: none; background: var(--dark-graphite); color: var(--text-light); padding: 32px 24px; border-bottom: 2px solid var(--accent-petrol);">
-    <div class="container" style="display: flex; flex-direction: column; gap: 20px;">
+    <div class="container" style="display: flex; flex-direction: column; gap: 18px;">
       <a href="#home" onclick="toggleMobileMenu()" style="color: var(--text-light); text-decoration: none; font-weight: 600; text-transform: uppercase;">Home</a>
       <a href="#about" onclick="toggleMobileMenu()" style="color: var(--text-light); text-decoration: none; font-weight: 600; text-transform: uppercase;">About Us</a>
       <a href="#services" onclick="toggleMobileMenu()" style="color: var(--text-light); text-decoration: none; font-weight: 600; text-transform: uppercase;">Services (All 12)</a>
@@ -1248,7 +1334,13 @@
       <a href="#capabilities" onclick="toggleMobileMenu()" style="color: var(--text-light); text-decoration: none; font-weight: 600; text-transform: uppercase;">Capabilities</a>
       <a href="#process" onclick="toggleMobileMenu()" style="color: var(--text-light); text-decoration: none; font-weight: 600; text-transform: uppercase;">Our Process</a>
       <a href="#contact" onclick="toggleMobileMenu()" style="color: var(--text-light); text-decoration: none; font-weight: 600; text-transform: uppercase;">Contact</a>
-      <a href="mailto:mail.glassfabindia@gmail.com" style="color: var(--silver-aluminium); text-decoration: none; font-size: 0.85rem;">✉ mail.glassfabindia@gmail.com</a>
+      
+      <div style="padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.15); display: flex; flex-direction: column; gap: 10px;">
+        <a href="tel:+919766055380" style="color: var(--text-light); text-decoration: none; font-weight: 700; font-size: 0.95rem;">📞 +91 9766055380</a>
+        <a href="mailto:mail.glassfabindia@gmail.com" style="color: var(--silver-aluminium); text-decoration: none; font-size: 0.85rem;">✉ mail.glassfabindia@gmail.com</a>
+        <a href="https://wa.me/919766055380?text=Hello%20Glass%20Fab%20India,%20we%20have%20a%20project%20inquiry" target="_blank" style="color: #25D366; text-decoration: none; font-weight: 600; font-size: 0.88rem;">💬 Chat on WhatsApp</a>
+      </div>
+
       <button onclick="toggleMobileMenu(); openRfpModal();" class="btn btn-petrol" style="margin-top: 10px; width: 100%;">DISCUSS A PROJECT</button>
     </div>
   </div>
@@ -1258,23 +1350,13 @@
          SECTION 01: HERO EXPERIENCE (With Upper-Right "SINCE 2019" Editorial Label)
          ========================================================================== -->
     <section id="home" class="hero-section">
-      <div class="hero-bg-overlay"></div>
-      
-      <!-- Architectural Wireframe SVG Motif -->
-      <svg class="hero-wireframe-art" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="100,50 700,50 780,550 20,550" stroke="#A8B1B2" stroke-width="1.5" stroke-dasharray="4 4" />
-        <line x1="250" y1="50" x2="210" y2="550" stroke="#174E50" stroke-width="2" />
-        <line x1="400" y1="50" x2="400" y2="550" stroke="#174E50" stroke-width="2" />
-        <line x1="550" y1="50" x2="590" y2="550" stroke="#174E50" stroke-width="2" />
-        <line x1="50" y1="180" x2="750" y2="180" stroke="#A8B1B2" stroke-width="1" />
-        <line x1="40" y1="320" x2="760" y2="320" stroke="#A8B1B2" stroke-width="1" />
-        <line x1="30" y1="440" x2="770" y2="440" stroke="#A8B1B2" stroke-width="1" />
-      </svg>
+      <div class="hero-bg-photo"></div>
+      <div class="hero-glass-reflection"></div>
 
       <div class="container" style="position: relative; z-index: 10; width: 100%;">
         <!-- Hero Top Row: Eyebrow + Upper-Right Permanent "SINCE 2019" Editorial Label -->
         <div class="hero-top-row">
-          <div class="badge-editorial" style="background: rgba(23, 78, 80, 0.45); color: var(--text-light); border-color: var(--accent-petrol);">
+          <div class="badge-editorial" style="background: rgba(23, 78, 80, 0.55); color: var(--text-light); border-color: rgba(255, 255, 255, 0.25); backdrop-filter: blur(12px);">
             B2B Architectural Façade & Glazing Partner
           </div>
           <div class="est-badge" aria-label="Established 2019">
@@ -1289,6 +1371,9 @@
           <div class="hero-cta-group">
             <button onclick="openRfpModal()" class="btn btn-petrol">DISCUSS A PROJECT</button>
             <a href="#projects" class="btn btn-outline-light">EXPLORE OUR WORK</a>
+            <a href="tel:+919766055380" class="btn btn-outline-light" style="border-color: var(--copper-oxidized); color: #FFFFFF;">
+              CALL: +91 9766055380
+            </a>
           </div>
         </div>
 
@@ -1296,15 +1381,15 @@
         <div class="hero-stats-row">
           <div class="hero-stat-card">
             <div class="hero-stat-title">Architectural Precision</div>
-            <div class="hero-stat-desc">Engineered shop drawings and strict tolerance control for complex geometry.</div>
+            <div class="hero-stat-desc">Engineered shop drawings and strict tolerance control for complex planar geometry.</div>
           </div>
           <div class="hero-stat-card">
             <div class="hero-stat-title">Technical Coordination</div>
-            <div class="hero-stat-desc">Seamless synchronization between structural engineers, architects and main contractors.</div>
+            <div class="hero-stat-desc">Seamless synchronization between structural consultants, MEP trades and main contractors.</div>
           </div>
           <div class="hero-stat-card">
             <div class="hero-stat-title">Package Contracting</div>
-            <div class="hero-stat-desc">Single-point responsibility from BOQ evaluation to handover.</div>
+            <div class="hero-stat-desc">Single-point responsibility from BOQ evaluation to final QA handover.</div>
           </div>
           <div class="hero-stat-card">
             <div class="hero-stat-title">Quality Workmanship</div>
@@ -1314,13 +1399,16 @@
       </div>
     </section>
 
+    <!-- Prismatic Divider -->
+    <div class="glass-refraction-bar"></div>
+
     <!-- ==========================================================================
          SECTION 02 & 06: COMPANY INTRODUCTION & ABOUT US
          ========================================================================== -->
     <section id="about" class="intro-section">
       <div class="container">
         <div class="intro-grid">
-          <div class="intro-text">
+          <div class="intro-text reveal-on-scroll">
             <span class="section-eyebrow">About GLASS FAB INDIA</span>
             <h2 class="section-title">BUILT AROUND PRECISION. DELIVERED WITH PURPOSE.</h2>
             <p class="lead">We transform complex architectural blueprints into high-performance building envelopes. With a focus on structural integrity and aesthetic finesse, we ensure your development stands the test of time.</p>
@@ -1333,21 +1421,25 @@
             </div>
           </div>
 
-          <div class="intro-card-architectural">
-            <h4>B2B Execution Mandate</h4>
-            <p>We undertake defined façade, glazing, aluminium fabrication and associated construction packages with rigorous site discipline. We eliminate inter-trade friction and safeguard completion schedules.</p>
+          <div class="intro-card-architectural glass-panel-light reveal-on-scroll">
+            <h4 style="font-size: 1.2rem; text-transform: uppercase; margin-bottom: 14px; color: var(--dark-graphite);">B2B Execution Mandate</h4>
+            <p style="color: var(--text-muted); font-size: 0.94rem; line-height: 1.65; margin-bottom: 24px;">
+              We undertake defined façade, glazing, aluminium fabrication and associated construction packages with rigorous site discipline. We eliminate inter-trade friction and safeguard completion schedules.
+            </p>
             
             <div class="target-sectors-box">
               <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-petrol); font-weight: 700; margin-bottom: 6px;">Target Client Profiles</div>
               Real Estate Developers • Main Construction Contractors • Façade Contractors • EPC Firms • Architects & Consultants • Industrial & Commercial Project Owners
             </div>
 
-            <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center;">
+            <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(34, 41, 43, 0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
               <div>
-                <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Official Channel</div>
-                <a href="mailto:mail.glassfabindia@gmail.com" style="color: var(--accent-petrol); text-decoration: none; font-weight: 600; font-size: 0.88rem;">mail.glassfabindia@gmail.com</a>
+                <div style="font-size: 0.74rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Official Channel</div>
+                <a href="mailto:mail.glassfabindia@gmail.com" style="color: var(--accent-petrol); text-decoration: none; font-weight: 700; font-size: 0.88rem;">mail.glassfabindia@gmail.com</a>
               </div>
-              <span style="font-size: 0.72rem; color: var(--silver-aluminium); font-weight: 600; letter-spacing: 0.1em;">EST. 2019</span>
+              <div>
+                <a href="tel:+919766055380" style="color: var(--dark-graphite); text-decoration: none; font-weight: 700; font-size: 0.88rem;">+91 9766055380</a>
+              </div>
             </div>
           </div>
         </div>
@@ -1359,7 +1451,7 @@
          ========================================================================== -->
     <section id="services" class="services-section">
       <div class="container">
-        <div class="services-header-row">
+        <div class="services-header-row reveal-on-scroll">
           <div>
             <span class="section-eyebrow">Comprehensive Capabilities</span>
             <h2 class="section-title" style="margin-bottom: 0;">Integrated Solutions for the Building Envelope.</h2>
@@ -1371,14 +1463,14 @@
 
         <div class="services-grid-12">
           <!-- 01 -->
-          <div class="service-card-item" onclick="openServiceDetail('Structural Glazing')">
+          <div class="service-card-item glass-panel-light reveal-on-scroll" onclick="openServiceDetail('Structural Glazing')">
             <div>
               <div class="service-card-number">
                 <span>01 / 12</span>
                 <span>SYSTEM</span>
               </div>
               <h3>Structural Glazing</h3>
-              <p>Provides seamless integration in modern architecture design. Engineered silicone bonding and mechanical retention for uninterrupted exterior planar surfaces.</p>
+              <p>Provides seamless integration in modern architecture design. Engineered structural silicone bonding and mechanical retention for uninterrupted exterior planar glass envelopes.</p>
             </div>
             <div class="service-card-footer">
               <span>High Precision Planar</span>
@@ -1387,14 +1479,14 @@
           </div>
 
           <!-- 02 -->
-          <div class="service-card-item" onclick="openServiceDetail('Curtain Wall Systems')">
+          <div class="service-card-item glass-panel-light reveal-on-scroll" onclick="openServiceDetail('Curtain Wall Systems')">
             <div>
               <div class="service-card-number">
                 <span>02 / 12</span>
                 <span>SYSTEM</span>
               </div>
               <h3>Curtain Wall Systems</h3>
-              <p>Enhances aesthetic appeal while ensuring structural integrity. Stick and semi-unitized systems designed for high-wind loads, acoustic damping, and water tightness.</p>
+              <p>Enhances aesthetic appeal while ensuring structural integrity. Stick and semi-unitized systems designed for high-wind loads, acoustic damping, thermal insulation, and water tightness.</p>
             </div>
             <div class="service-card-footer">
               <span>Weather-Resistant</span>
@@ -1403,14 +1495,14 @@
           </div>
 
           <!-- 03 -->
-          <div class="service-card-item" onclick="openServiceDetail('Spider Glazing')">
+          <div class="service-card-item glass-panel-light reveal-on-scroll" onclick="openServiceDetail('Spider Glazing')">
             <div>
               <div class="service-card-number">
                 <span>03 / 12</span>
                 <span>SYSTEM</span>
               </div>
               <h3>Spider Glazing</h3>
-              <p>Offers point-supported transparency for stunning façades. High-grade stainless steel spider fittings and glass fins creating monumental entrance canopies and atriums.</p>
+              <p>Offers point-supported transparency for stunning façades. High-grade stainless steel spider fittings and glass fins creating monumental entrance canopies, atriums, and lobbies.</p>
             </div>
             <div class="service-card-footer">
               <span>Point-Supported</span>
@@ -1419,7 +1511,7 @@
           </div>
 
           <!-- 04 -->
-          <div class="service-card-item" onclick="openServiceDetail('ACP Cladding')">
+          <div class="service-card-item glass-panel-light reveal-on-scroll" onclick="openServiceDetail('ACP Cladding')">
             <div>
               <div class="service-card-number">
                 <span>04 / 12</span>
@@ -1435,14 +1527,14 @@
           </div>
 
           <!-- 05 -->
-          <div class="service-card-item" onclick="openServiceDetail('Aluminium Doors & Windows')">
+          <div class="service-card-item glass-panel-light reveal-on-scroll" onclick="openServiceDetail('Aluminium Doors & Windows')">
             <div>
               <div class="service-card-number">
                 <span>05 / 12</span>
                 <span>FABRICATION</span>
               </div>
               <h3>Aluminium Doors & Windows</h3>
-              <p>Combines durability and elegance in architectural design. Heavy-duty commercial-grade thermal break sliding, casement, and automated entrance systems.</p>
+              <p>Combines durability and elegance in architectural design. Heavy-duty commercial-grade thermal break sliding, casement, tilt-and-turn, and automated entrance systems.</p>
             </div>
             <div class="service-card-footer">
               <span>Commercial Grade</span>
@@ -1451,7 +1543,7 @@
           </div>
 
           <!-- 06 -->
-          <div class="service-card-item" onclick="openServiceDetail('Architectural Louvers')">
+          <div class="service-card-item glass-panel-light reveal-on-scroll" onclick="openServiceDetail('Architectural Louvers')">
             <div>
               <div class="service-card-number">
                 <span>06 / 12</span>
@@ -1467,7 +1559,7 @@
           </div>
 
           <!-- 07 -->
-          <div class="service-card-item" onclick="openServiceDetail('uPVC Fins')">
+          <div class="service-card-item glass-panel-light reveal-on-scroll" onclick="openServiceDetail('uPVC Fins')">
             <div>
               <div class="service-card-number">
                 <span>07 / 12</span>
@@ -1483,7 +1575,7 @@
           </div>
 
           <!-- 08 -->
-          <div class="service-card-item" onclick="openServiceDetail('Glass & Aluminium Fabrication')">
+          <div class="service-card-item glass-panel-light reveal-on-scroll" onclick="openServiceDetail('Glass & Aluminium Fabrication')">
             <div>
               <div class="service-card-number">
                 <span>08 / 12</span>
@@ -1499,7 +1591,7 @@
           </div>
 
           <!-- 09 -->
-          <div class="service-card-item" onclick="openServiceDetail('HVAC Works')">
+          <div class="service-card-item glass-panel-light reveal-on-scroll" onclick="openServiceDetail('HVAC Works')">
             <div>
               <div class="service-card-number">
                 <span>09 / 12</span>
@@ -1515,7 +1607,7 @@
           </div>
 
           <!-- 10 -->
-          <div class="service-card-item" onclick="openServiceDetail('Civil Works')">
+          <div class="service-card-item glass-panel-light reveal-on-scroll" onclick="openServiceDetail('Civil Works')">
             <div>
               <div class="service-card-number">
                 <span>10 / 12</span>
@@ -1531,7 +1623,7 @@
           </div>
 
           <!-- 11 -->
-          <div class="service-card-item" onclick="openServiceDetail('Interior Works')">
+          <div class="service-card-item glass-panel-light reveal-on-scroll" onclick="openServiceDetail('Interior Works')">
             <div>
               <div class="service-card-number">
                 <span>11 / 12</span>
@@ -1547,7 +1639,7 @@
           </div>
 
           <!-- 12 -->
-          <div class="service-card-item" onclick="openServiceDetail('Turnkey Contracting')">
+          <div class="service-card-item glass-panel-light reveal-on-scroll" onclick="openServiceDetail('Turnkey Contracting')">
             <div>
               <div class="service-card-number">
                 <span>12 / 12</span>
@@ -1570,11 +1662,11 @@
     </section>
 
     <!-- ==========================================================================
-         SECTION 04 & 08: FEATURED PROJECTS & PORTFOLIO
+         SECTION 04 & 08: FEATURED PROJECTS & PORTFOLIO (WITH ARCHITECTURAL PHOTOS)
          ========================================================================== -->
     <section id="projects" class="projects-section">
       <div class="container">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;" class="reveal-on-scroll">
           <div>
             <span class="section-eyebrow" style="color: var(--copper-oxidized);">Execution Scopes</span>
             <h2 class="section-title light" style="margin-bottom: 0;">Our Work. Our Execution.</h2>
@@ -1586,7 +1678,7 @@
 
         <div class="projects-editorial-grid">
           <!-- Featured Large Project -->
-          <div class="project-card featured-large">
+          <div class="project-card glass-panel-dark featured-large reveal-on-scroll">
             <div>
               <div class="project-tag">Commercial Tower Package</div>
               <div class="project-title">Urban Glazed Commercial High-Rise</div>
@@ -1596,16 +1688,8 @@
               </p>
             </div>
             
-            <div class="project-visual-mock">
-              <svg width="100%" height="100%" viewBox="0 0 500 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="20" y="20" width="460" height="200" stroke="#A8B1B2" stroke-width="1" stroke-dasharray="2 4" />
-                <line x1="120" y1="20" x2="120" y2="220" stroke="#174E50" stroke-width="2" />
-                <line x1="240" y1="20" x2="240" y2="220" stroke="#174E50" stroke-width="2" />
-                <line x1="360" y1="20" x2="360" y2="220" stroke="#174E50" stroke-width="2" />
-                <line x1="20" y1="80" x2="480" y2="80" stroke="#A8B1B2" stroke-width="1" />
-                <line x1="20" y1="140" x2="480" y2="140" stroke="#A8B1B2" stroke-width="1" />
-                <text x="250" y="115" fill="#A8B1B2" font-family="Montserrat" font-size="12" text-anchor="middle" letter-spacing="3">STRUCTURAL GLAZING ELEVATION</text>
-              </svg>
+            <div class="project-image-box">
+              <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop" alt="Structural Glazing Commercial High-Rise" loading="lazy" />
             </div>
 
             <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--card-border-dark); padding-top: 16px;">
@@ -1615,7 +1699,7 @@
           </div>
 
           <!-- Featured Medium Project -->
-          <div class="project-card featured-medium">
+          <div class="project-card glass-panel-dark featured-medium reveal-on-scroll">
             <div>
               <div class="project-tag">Industrial & Tech Campus</div>
               <div class="project-title">Corporate Headquarters Atrium</div>
@@ -1625,13 +1709,8 @@
               </p>
             </div>
 
-            <div class="project-visual-mock">
-              <svg width="100%" height="100%" viewBox="0 0 350 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="175" cy="100" r="50" stroke="#B77B5C" stroke-width="1.5" stroke-dasharray="3 3" />
-                <line x1="175" y1="20" x2="175" y2="180" stroke="#A8B1B2" stroke-width="1.5" />
-                <line x1="80" y1="100" x2="270" y2="100" stroke="#A8B1B2" stroke-width="1.5" />
-                <text x="175" y="105" fill="#A8B1B2" font-family="Montserrat" font-size="11" text-anchor="middle" letter-spacing="2">SPIDER FITTING DETAIL</text>
-              </svg>
+            <div class="project-image-box">
+              <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop" alt="Spider Glazing Atrium Canopy" loading="lazy" />
             </div>
 
             <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--card-border-dark); padding-top: 16px;">
@@ -1641,7 +1720,7 @@
           </div>
 
           <!-- Standard Project 1 -->
-          <div class="project-card featured-standard">
+          <div class="project-card glass-panel-dark featured-standard reveal-on-scroll">
             <div>
               <div class="project-tag">Architectural Envelope</div>
               <div class="project-title">Aerodynamic Louver Façade</div>
@@ -1650,13 +1729,16 @@
                 Solar radiation control system reducing cooling loads while maintaining clean horizontal rhythm across all elevations.
               </p>
             </div>
-            <div style="margin-top: 24px; border-top: 1px solid var(--card-border-dark); padding-top: 14px;">
+            <div class="project-image-box" style="height: 160px;">
+              <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=1000&auto=format&fit=crop" alt="Aerodynamic Louver Façade" loading="lazy" />
+            </div>
+            <div style="border-top: 1px solid var(--card-border-dark); padding-top: 14px;">
               <span style="font-size: 0.75rem; color: var(--silver-aluminium);">Solar Management • Clean Geometry</span>
             </div>
           </div>
 
           <!-- Standard Project 2 -->
-          <div class="project-card featured-standard">
+          <div class="project-card glass-panel-dark featured-standard reveal-on-scroll">
             <div>
               <div class="project-tag">Commercial Retail</div>
               <div class="project-title">Retail Flagship Glass Envelope</div>
@@ -1665,13 +1747,16 @@
                 Continuous frameless structural vision panels and custom-profiled aluminium entrance portals with automated operators.
               </p>
             </div>
-            <div style="margin-top: 24px; border-top: 1px solid var(--card-border-dark); padding-top: 14px;">
+            <div class="project-image-box" style="height: 160px;">
+              <img src="https://images.unsplash.com/photo-1577495508048-b635879837f1?q=80&w=1000&auto=format&fit=crop" alt="Retail Flagship Glass Envelope" loading="lazy" />
+            </div>
+            <div style="border-top: 1px solid var(--card-border-dark); padding-top: 14px;">
               <span style="font-size: 0.75rem; color: var(--silver-aluminium);">Frameless Aesthetics • High Traffic</span>
             </div>
           </div>
 
           <!-- Standard Project 3 -->
-          <div class="project-card featured-standard">
+          <div class="project-card glass-panel-dark featured-standard reveal-on-scroll">
             <div>
               <div class="project-tag">Turnkey Package</div>
               <div class="project-title">Corporate Facility Modernization</div>
@@ -1680,7 +1765,10 @@
                 Comprehensive building skin retrofitting including sub-frame fabrication, insulation, cladding, and window replacement.
               </p>
             </div>
-            <div style="margin-top: 24px; border-top: 1px solid var(--card-border-dark); padding-top: 14px;">
+            <div class="project-image-box" style="height: 160px;">
+              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop" alt="Corporate Facility Modernization" loading="lazy" />
+            </div>
+            <div style="border-top: 1px solid var(--card-border-dark); padding-top: 14px;">
               <span style="font-size: 0.75rem; color: var(--silver-aluminium);">Full Turnkey Execution</span>
             </div>
           </div>
@@ -1693,42 +1781,44 @@
          ========================================================================== -->
     <section class="why-section">
       <div class="container">
-        <span class="section-eyebrow">Strategic Value Proposition</span>
-        <h2 class="section-title">The Right Execution Partner Matters.</h2>
-        <p class="section-desc">Six disciplined business strengths that define our partnerships with developers, architects, and main contractors.</p>
+        <div class="reveal-on-scroll">
+          <span class="section-eyebrow">Strategic Value Proposition</span>
+          <h2 class="section-title">The Right Execution Partner Matters.</h2>
+          <p class="section-desc">Six disciplined business strengths that define our partnerships with developers, architects, and main contractors.</p>
+        </div>
 
         <div class="pillars-grid">
-          <div class="pillar-box">
+          <div class="pillar-box glass-panel-light reveal-on-scroll">
             <div class="pillar-num">PILLAR 01</div>
             <h4>Execution-Focused Approach</h4>
             <p>We prioritize site programs and project milestones. By aligning fabrication schedules with structural pouring sequences, we safeguard the master construction timeline.</p>
           </div>
 
-          <div class="pillar-box">
+          <div class="pillar-box glass-panel-light reveal-on-scroll">
             <div class="pillar-num">PILLAR 02</div>
             <h4>Specialized Service Portfolio</h4>
             <p>Our capabilities cover the entire building envelope—from structural glazing and spider fittings to aluminium fabrication, louvers, and interior glass works.</p>
           </div>
 
-          <div class="pillar-box">
+          <div class="pillar-box glass-panel-light reveal-on-scroll">
             <div class="pillar-num">PILLAR 03</div>
             <h4>Technical Coordination</h4>
             <p>We proactively resolve detailing challenges between structural engineers, MEP trades, and architectural consultants, eliminating costly site reworks.</p>
           </div>
 
-          <div class="pillar-box">
+          <div class="pillar-box glass-panel-light reveal-on-scroll">
             <div class="pillar-num">PILLAR 04</div>
             <h4>Quality-Conscious Workmanship</h4>
             <p>All materials, structural sealants, and extrusions conform to rigorous Indian and international structural, thermal, and wind-load standards.</p>
           </div>
 
-          <div class="pillar-box">
+          <div class="pillar-box glass-panel-light reveal-on-scroll">
             <div class="pillar-num">PILLAR 05</div>
             <h4>Project Coordination</h4>
             <p>Dedicated project engineers oversee site surveying, anchor embedment verification, rigging, and staging, maintaining complete transparency.</p>
           </div>
 
-          <div class="pillar-box">
+          <div class="pillar-box glass-panel-light reveal-on-scroll">
             <div class="pillar-num">PILLAR 06</div>
             <h4>Commitment to Agreed Delivery</h4>
             <p>We stand behind our commitments. Clear BOQ verification, disciplined resource allocation, and zero compromise on agreed specifications.</p>
@@ -1742,7 +1832,7 @@
          ========================================================================== -->
     <section id="capabilities" class="capabilities-section">
       <div class="container">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;" class="reveal-on-scroll">
           <div>
             <span class="section-eyebrow">Verified Technical Scope</span>
             <h2 class="section-title" style="margin-bottom: 0;">Capabilities Behind Every Project.</h2>
@@ -1753,48 +1843,48 @@
         </div>
 
         <div class="cap-matrix">
-          <div class="cap-item">
+          <div class="cap-item glass-panel-light reveal-on-scroll">
             <h4>Façade Execution</h4>
             <p>Installation of unitized, semi-unitized, and stick curtain walling engineered for wind pressures and seismic movement.</p>
           </div>
 
-          <div class="cap-item">
+          <div class="cap-item glass-panel-light reveal-on-scroll">
             <h4>Glass Systems</h4>
             <p>Handling and precision glazing of insulated glass units (IGU), laminated acoustic glass, ceramic frit, and jumbo panels.</p>
           </div>
 
-          <div class="cap-item">
+          <div class="cap-item glass-panel-light reveal-on-scroll">
             <h4>Aluminium Systems</h4>
             <p>Fabrication and installation of commercial-grade extrusions, sub-frames, brackets, and thermal break profiles.</p>
           </div>
 
-          <div class="cap-item">
+          <div class="cap-item glass-panel-light reveal-on-scroll">
             <h4>Fabrication Shop</h4>
             <p>Precision shop fabrication, CNC cutting, punching, gasket insertion, and structural sealant application under controlled conditions.</p>
           </div>
 
-          <div class="cap-item">
+          <div class="cap-item glass-panel-light reveal-on-scroll">
             <h4>Site Operations</h4>
             <p>Cranage, glass spider rigging, cradle access, mast climber staging, and strict adherence to on-site HSE protocols.</p>
           </div>
 
-          <div class="cap-item">
+          <div class="cap-item glass-panel-light reveal-on-scroll">
             <h4>Technical Coordination</h4>
             <p>Development of architectural shop drawings, 3D interface models, and BOQ quantity take-offs.</p>
           </div>
 
-          <div class="cap-item">
+          <div class="cap-item glass-panel-light reveal-on-scroll">
             <h4>Associated Construction</h4>
             <p>Civil embedments, structural steel supports, flashing, sealants, smoke seals, and interior fit-out interfaces.</p>
           </div>
 
-          <div class="cap-item">
+          <div class="cap-item glass-panel-light reveal-on-scroll">
             <h4>Package Contracting</h4>
             <p>Turnkey package management including material procurement, quality assurance testing, and formal project handover.</p>
           </div>
         </div>
 
-        <div class="profile-download-banner">
+        <div class="profile-download-banner glass-panel-dark reveal-on-scroll">
           <div>
             <h3 class="brand-font" style="font-size: 1.45rem; text-transform: uppercase; margin-bottom: 8px;">SHARE YOUR PROJECT REQUIREMENTS</h3>
             <p style="color: var(--silver-aluminium); font-size: 0.94rem; font-weight: 300;">Download our corporate capability overview or transmit your tender BOQ to our estimation engineers.</p>
@@ -1812,36 +1902,38 @@
          ========================================================================== -->
     <section id="process" class="process-section">
       <div class="container">
-        <span class="section-eyebrow">Methodology & Quality Assurance</span>
-        <h2 class="section-title">From Scope to Completion.</h2>
-        <p class="section-desc">A structured, five-stage technical delivery methodology engineered to eliminate execution gaps from initial blueprint to final handover.</p>
+        <div class="reveal-on-scroll">
+          <span class="section-eyebrow">Methodology & Quality Assurance</span>
+          <h2 class="section-title">From Scope to Completion.</h2>
+          <p class="section-desc">A structured, five-stage technical delivery methodology engineered to eliminate execution gaps from initial blueprint to final handover.</p>
+        </div>
 
         <div class="process-row">
-          <div class="process-column">
+          <div class="process-column glass-panel-light reveal-on-scroll">
             <div class="process-num-large">01</div>
             <h4>Understand</h4>
             <p>Review project requirements, architectural specifications, tender drawings, structural wind-load criteria, and agreed package scope.</p>
           </div>
 
-          <div class="process-column">
+          <div class="process-column glass-panel-light reveal-on-scroll">
             <div class="process-num-large">02</div>
             <h4>Plan</h4>
             <p>Evaluate materials, extrusions, structural sealants, technical schedules, and execution staging timelines with project stakeholders.</p>
           </div>
 
-          <div class="process-column">
+          <div class="process-column glass-panel-light reveal-on-scroll">
             <div class="process-num-large">03</div>
             <h4>Coordinate</h4>
             <p>Align site activities, embedment checks, fabrication batching, deliveries, and manpower with the main contractor's master program.</p>
           </div>
 
-          <div class="process-column">
+          <div class="process-column glass-panel-light reveal-on-scroll">
             <div class="process-num-large">04</div>
             <h4>Execute</h4>
             <p>Undertake the agreed project scope with meticulous attention to workmanship, tolerances, weather-proofing, and on-site safety standards.</p>
           </div>
 
-          <div class="process-column">
+          <div class="process-column glass-panel-light reveal-on-scroll">
             <div class="process-num-large">05</div>
             <h4>Deliver</h4>
             <p>Perform water penetration and sealant inspections, complete agreed scope punch-lists, and coordinate formal project handover.</p>
@@ -1855,42 +1947,44 @@
          ========================================================================== -->
     <section class="partners-section">
       <div class="container">
-        <span class="section-eyebrow">Collaborative Ecosystem</span>
-        <h2 class="section-title">Built for Project-Driven Partnerships.</h2>
-        <p class="section-desc">GLASS FAB INDIA acts as a specialized package execution partner for major construction stakeholders.</p>
+        <div class="reveal-on-scroll">
+          <span class="section-eyebrow">Collaborative Ecosystem</span>
+          <h2 class="section-title">Built for Project-Driven Partnerships.</h2>
+          <p class="section-desc">GLASS FAB INDIA acts as a specialized package execution partner for major construction stakeholders.</p>
+        </div>
 
         <div class="audience-grid">
-          <div class="audience-card">
+          <div class="audience-card glass-panel-light reveal-on-scroll">
             <div class="audience-icon">01</div>
             <h4>Real Estate Developers</h4>
           </div>
 
-          <div class="audience-card">
+          <div class="audience-card glass-panel-light reveal-on-scroll">
             <div class="audience-icon">02</div>
             <h4>Main Contractors</h4>
           </div>
 
-          <div class="audience-card">
+          <div class="audience-card glass-panel-light reveal-on-scroll">
             <div class="audience-icon">03</div>
             <h4>Façade Contractors</h4>
           </div>
 
-          <div class="audience-card">
+          <div class="audience-card glass-panel-light reveal-on-scroll">
             <div class="audience-icon">04</div>
             <h4>EPC Companies</h4>
           </div>
 
-          <div class="audience-card">
+          <div class="audience-card glass-panel-light reveal-on-scroll">
             <div class="audience-icon">05</div>
             <h4>Architects & Consultants</h4>
           </div>
 
-          <div class="audience-card">
+          <div class="audience-card glass-panel-light reveal-on-scroll">
             <div class="audience-icon">06</div>
             <h4>Industrial Developers</h4>
           </div>
 
-          <div class="audience-card">
+          <div class="audience-card glass-panel-light reveal-on-scroll">
             <div class="audience-icon">07</div>
             <h4>Institutional Developers</h4>
           </div>
@@ -1899,32 +1993,48 @@
     </section>
 
     <!-- ==========================================================================
-         SECTION 09 & 11: PROJECT ENQUIRY & CONTACT EXPERIENCE
+         SECTION 09 & 11: PROJECT ENQUIRY & CONTACT EXPERIENCE (WITH REAL DETAILS)
          ========================================================================== -->
     <section id="contact" class="contact-section">
       <div class="container">
-        <span class="section-eyebrow" style="color: var(--copper-oxidized);">Planning a Project?</span>
-        <h2 class="section-title light">Let's Discuss the Scope.</h2>
+        <div class="reveal-on-scroll">
+          <span class="section-eyebrow" style="color: var(--copper-oxidized);">Planning a Project?</span>
+          <h2 class="section-title light">Let's Discuss the Scope.</h2>
+        </div>
 
         <div class="contact-layout">
-          <div class="contact-info-panel">
+          <div class="contact-info-panel reveal-on-scroll">
             <p>Share your project requirements, drawings or BOQ with our technical team. Let's explore how GLASS FAB INDIA can support your development with precision execution.</p>
 
+            <!-- Phone Direct Link -->
+            <div class="direct-contact-item">
+              <div class="direct-contact-label">Telephone / Direct Line</div>
+              <a href="tel:+919766055380" class="direct-contact-value">
+                <span>📞</span> +91 9766055380
+              </a>
+            </div>
+
+            <!-- Email Direct Link -->
             <div class="direct-contact-item">
               <div class="direct-contact-label">Official Business Email</div>
-              <a href="mailto:mail.glassfabindia@gmail.com" class="direct-contact-value">mail.glassfabindia@gmail.com</a>
+              <a href="mailto:mail.glassfabindia@gmail.com" class="direct-contact-value">
+                <span>✉</span> mail.glassfabindia@gmail.com
+              </a>
             </div>
 
+            <!-- WhatsApp Direct Link -->
             <div class="direct-contact-item">
-              <div class="direct-contact-label">Technical Telephone Line</div>
-              <div class="direct-contact-value" style="color: var(--silver-aluminium);">+91 (Contact Desk — Connect via Email/Form)</div>
+              <div class="direct-contact-label">Instant WhatsApp Consultation</div>
+              <a href="https://wa.me/919766055380?text=Hello%20Glass%20Fab%20India,%20we%20have%20a%20project%20inquiry" target="_blank" class="direct-contact-value" style="color: #25D366;">
+                <span>💬</span> WhatsApp +91 9766055380
+              </a>
             </div>
 
-            <div class="direct-contact-item">
-              <div class="direct-contact-label">Operations & Coverage</div>
-              <p style="color: var(--silver-aluminium); margin-bottom: 0; font-size: 0.95rem;">
-                Serving pan-India commercial, industrial, high-rise residential, and architectural infrastructure developments.
-              </p>
+            <div class="contact-actions-row">
+              <a href="tel:+919766055380" class="btn btn-petrol">CALL NOW</a>
+              <a href="https://wa.me/919766055380?text=Hello%20Glass%20Fab%20India,%20we%20have%20a%20project%20inquiry" target="_blank" class="btn btn-outline-light" style="border-color: #25D366; color: #25D366;">
+                CHAT ON WHATSAPP
+              </a>
             </div>
 
             <div style="margin-top: 36px; padding: 24px; background: rgba(34, 41, 43, 0.6); border-left: 3px solid var(--accent-petrol);">
@@ -1936,7 +2046,7 @@
           </div>
 
           <!-- Main Contact / RFP Form -->
-          <div class="contact-form-card">
+          <div class="contact-form-card glass-panel-dark reveal-on-scroll">
             <h3 class="brand-font" style="font-size: 1.3rem; text-transform: uppercase; margin-bottom: 24px; color: var(--text-light);">Start a Project Enquiry</h3>
             
             <form id="contactForm" onsubmit="handleFormSubmit(event)">
@@ -2031,14 +2141,14 @@
         <!-- Brand Summary -->
         <div>
           <a href="#home" class="logo-container" style="color: var(--text-light); margin-bottom: 16px;">
-            <div class="logo-symbol" style="width: 32px; height: 32px;">
+            <div class="logo-symbol" style="width: 34px; height: 34px;">
               <svg viewBox="0 0 44 44" fill="none">
                 <rect x="2" y="2" width="40" height="40" stroke="#F3F1EB" stroke-width="2.5" />
                 <path d="M 28 13 H 14 V 31 H 28 V 22 H 20" stroke="#174E50" stroke-width="2.8" />
                 <line x1="20" y1="13" x2="28" y2="13" stroke="#B77B5C" stroke-width="2.8" />
               </svg>
             </div>
-            <div class="logo-text-title" style="font-size: 1.1rem;">GLASS FAB INDIA</div>
+            <div class="logo-text-title" style="font-size: 1.15rem;">GLASS FAB INDIA</div>
           </a>
           <p style="font-size: 0.88rem; color: var(--silver-aluminium); max-width: 380px; margin-bottom: 20px; line-height: 1.6;">
             Specialized architectural façade systems, glazing, aluminium fabrication, building envelope solutions, and turnkey package contracting.
@@ -2081,14 +2191,18 @@
           <h4>Business Contact</h4>
           <ul>
             <li>
-              <span style="font-size: 0.75rem; text-transform: uppercase; display: block; color: var(--silver-aluminium);">Official Email:</span>
+              <span style="font-size: 0.72rem; text-transform: uppercase; display: block; color: var(--copper-oxidized); font-weight: 700;">Direct Phone:</span>
+              <a href="tel:+919766055380" style="color: var(--text-light); font-weight: 700; font-size: 0.96rem;">+91 9766055380</a>
+            </li>
+            <li style="margin-top: 10px;">
+              <span style="font-size: 0.72rem; text-transform: uppercase; display: block; color: var(--copper-oxidized); font-weight: 700;">Official Email:</span>
               <a href="mailto:mail.glassfabindia@gmail.com" style="color: var(--text-light); font-weight: 600;">mail.glassfabindia@gmail.com</a>
             </li>
             <li style="margin-top: 10px;">
-              <span style="font-size: 0.75rem; text-transform: uppercase; display: block; color: var(--silver-aluminium);">Enquiry Desk:</span>
-              <span>pan-India Project Coordination</span>
+              <span style="font-size: 0.72rem; text-transform: uppercase; display: block; color: var(--copper-oxidized); font-weight: 700;">Instant WhatsApp:</span>
+              <a href="https://wa.me/919766055380?text=Hello%20Glass%20Fab%20India,%20we%20have%20a%20project%20inquiry" target="_blank" style="color: #25D366; font-weight: 600;">Chat +91 9766055380</a>
             </li>
-            <li style="margin-top: 14px;">
+            <li style="margin-top: 16px;">
               <button onclick="openRfpModal()" class="btn btn-petrol" style="padding: 9px 18px; font-size: 0.74rem;">DISCUSS A PROJECT</button>
             </li>
           </ul>
@@ -2106,16 +2220,22 @@
     </div>
   </footer>
 
+  <!-- Floating WhatsApp Quick Connect Button with Glass Finish -->
+  <a href="https://wa.me/919766055380?text=Hello%20Glass%20Fab%20India,%20we%20have%20a%20project%20inquiry" target="_blank" class="floating-whatsapp-btn" aria-label="Chat on WhatsApp with Glass Fab India">
+    <div class="whatsapp-dot"></div>
+    <span>WhatsApp +91 9766055380</span>
+  </a>
+
   <!-- ==========================================================================
        MODAL: DISCUSS A PROJECT
        ========================================================================== -->
   <div id="rfpModal" class="modal-backdrop" onclick="closeRfpModal(event)">
-    <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-box glass-panel-dark" onclick="event.stopPropagation()">
       <button class="modal-close-btn" onclick="closeRfpModal()" aria-label="Close modal">&times;</button>
       <span class="section-eyebrow" style="color: var(--copper-oxidized);">B2B Package Discussion</span>
       <h3 class="brand-font" style="font-size: 1.6rem; text-transform: uppercase; margin-bottom: 10px;">Discuss a Project</h3>
-      <p style="color: var(--silver-aluminium); font-size: 0.92rem; margin-bottom: 28px; font-weight: 300;">
-        Submit your project specifications or BOQ. Our engineering team will review and connect directly via <span style="color: var(--text-light);">mail.glassfabindia@gmail.com</span>.
+      <p style="color: var(--silver-aluminium); font-size: 0.92rem; margin-bottom: 24px; font-weight: 300;">
+        Submit your project specifications or BOQ. Our engineering team connects directly via <span style="color: var(--text-light);">mail.glassfabindia@gmail.com</span> or <span style="color: var(--text-light);">+91 9766055380</span>.
       </p>
 
       <form id="modalForm" onsubmit="handleModalSubmit(event)">
@@ -2190,8 +2310,22 @@
       }
     });
 
-    // Initialize anti-bot velocity timestamps
+    // Scroll Reveal Observer for Smooth Entrance Transitions
     document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+      // Set form security timestamps
       const now = Date.now().toString();
       document.querySelectorAll('.form-ts').forEach(input => input.value = now);
     });
@@ -2238,9 +2372,9 @@
 
     function downloadProfile() {
       showToast('Downloading GLASS FAB INDIA Capability Overview (PDF)...');
-      // Create and trigger structured company overview download
       const profileText = `GLASS FAB INDIA — Corporate Capability Overview (EST. 2019)
 Official Business Email: mail.glassfabindia@gmail.com
+Direct Contact: +91 9766055380
 Industry: Architectural Façade Engineering, Glass & Aluminium Systems, Building Envelope Solutions
 
 SERVICES PORTFOLIO:
@@ -2260,7 +2394,9 @@ SERVICES PORTFOLIO:
 EXECUTION METHODOLOGY:
 01 Understand -> 02 Plan -> 03 Coordinate -> 04 Execute -> 05 Deliver
 
-For tender evaluations and project BOQs, contact: mail.glassfabindia@gmail.com`;
+For tender evaluations and project BOQs, contact:
+Email: mail.glassfabindia@gmail.com
+Phone: +91 9766055380`;
       const blob = new Blob([profileText], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
