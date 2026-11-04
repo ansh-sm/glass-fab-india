@@ -506,6 +506,22 @@
       font-weight: 300;
     }
 
+    /* Form & Security Styles */
+    .hp-trap {
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+      height: 0;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
     /* Contact & RFP Section */
     .contact-grid {
       display: grid;
@@ -1088,25 +1104,29 @@
 
           <div class="rfp-form">
             <form id="contactForm" onsubmit="handleFormSubmit(event)">
+              <!-- Anti-Bot Honeypot and Velocity Timestamp -->
+              <input type="text" name="_trap_fax" class="hp-trap" tabindex="-1" autocomplete="off" />
+              <input type="hidden" name="_form_ts" class="form-ts" />
+
               <div class="form-row">
                 <div class="form-group">
                   <label for="contactPerson">Contact Person *</label>
-                  <input type="text" id="contactPerson" required placeholder="Full Name" />
+                  <input type="text" id="contactPerson" required placeholder="Full Name" maxlength="80" />
                 </div>
                 <div class="form-group">
                   <label for="companyName">Company Name *</label>
-                  <input type="text" id="companyName" required placeholder="Company or Firm Name" />
+                  <input type="text" id="companyName" required placeholder="Company or Firm Name" maxlength="100" />
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group">
                   <label for="email">Email *</label>
-                  <input type="email" id="email" required placeholder="name@company.com" />
+                  <input type="email" id="email" required placeholder="name@company.com" maxlength="120" />
                 </div>
                 <div class="form-group">
                   <label for="phone">Phone *</label>
-                  <input type="tel" id="phone" required placeholder="+91 / Phone Number" />
+                  <input type="tel" id="phone" required placeholder="+91 / Phone Number" maxlength="25" />
                 </div>
               </div>
 
@@ -1124,27 +1144,27 @@
                 </div>
                 <div class="form-group">
                   <label for="siteLocation">Site Location *</label>
-                  <input type="text" id="siteLocation" required placeholder="City, State" />
+                  <input type="text" id="siteLocation" required placeholder="City, State" maxlength="120" />
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group">
                   <label for="scopeSqFt">Scope (Sq. Ft.)</label>
-                  <input type="text" id="scopeSqFt" placeholder="e.g. 25,000 Sq. Ft." />
+                  <input type="text" id="scopeSqFt" placeholder="e.g. 25,000 Sq. Ft." maxlength="40" />
                 </div>
                 <div class="form-group">
                   <label for="timeline">Timeline</label>
-                  <input type="text" id="timeline" placeholder="Target Completion Month" />
+                  <input type="text" id="timeline" placeholder="Target Completion Month" maxlength="40" />
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="projectBrief">Project Brief / Drawings / BOQ Notes</label>
-                <textarea id="projectBrief" rows="3" placeholder="Describe architectural specifications, tender requirements, or scope..."></textarea>
+                <textarea id="projectBrief" rows="3" placeholder="Describe architectural specifications, tender requirements, or scope..." maxlength="2500"></textarea>
               </div>
 
-              <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px;">SUBMIT PROJECT BRIEF</button>
+              <button type="submit" id="submitBtnMain" class="btn btn-primary" style="width: 100%; padding: 14px;">SUBMIT PROJECT BRIEF</button>
             </form>
           </div>
         </div>
@@ -1197,47 +1217,51 @@
       <h3 class="brand-font" style="font-size: 1.6rem; text-transform: uppercase; margin-bottom: 8px;">DISCUSS A PROJECT</h3>
       <p style="color: var(--color-steel); font-size: 0.9rem; margin-bottom: 24px; font-weight: 300;">Submit your tender or project brief directly to our technical execution team.</p>
 
-      <form onsubmit="handleModalSubmit(event)">
+      <form id="modalForm" onsubmit="handleModalSubmit(event)">
+        <!-- Anti-Bot Honeypot and Velocity Timestamp -->
+        <input type="text" name="_trap_fax" class="hp-trap" tabindex="-1" autocomplete="off" />
+        <input type="hidden" name="_form_ts" class="form-ts" />
+
         <div class="form-row">
           <div class="form-group">
             <label>Contact Person *</label>
-            <input type="text" required placeholder="Full Name" />
+            <input type="text" id="modalContactPerson" required placeholder="Full Name" maxlength="80" />
           </div>
           <div class="form-group">
             <label>Company / Firm *</label>
-            <input type="text" required placeholder="Company Name" />
+            <input type="text" id="modalCompanyName" required placeholder="Company Name" maxlength="100" />
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label>Email *</label>
-            <input type="email" required placeholder="name@company.com" />
+            <input type="email" id="modalEmail" required placeholder="name@company.com" maxlength="120" />
           </div>
           <div class="form-group">
             <label>Phone *</label>
-            <input type="tel" required placeholder="+91 / Phone" />
+            <input type="tel" id="modalPhone" required placeholder="+91 / Phone" maxlength="25" />
           </div>
         </div>
 
         <div class="form-group">
           <label>Project Type *</label>
-          <select required>
+          <select id="modalProjectType" required>
             <option value="" disabled selected>Select Scope</option>
-            <option>Commercial Tower Façade</option>
-            <option>Industrial Cladding & Glazing</option>
-            <option>High-Rise Residential Envelope</option>
-            <option>Architectural Louvers & Fins</option>
-            <option>Turnkey Façade Package</option>
+            <option value="Commercial Tower Façade">Commercial Tower Façade</option>
+            <option value="Industrial Cladding & Glazing">Industrial Cladding & Glazing</option>
+            <option value="High-Rise Residential Envelope">High-Rise Residential Envelope</option>
+            <option value="Architectural Louvers & Fins">Architectural Louvers & Fins</option>
+            <option value="Turnkey Façade Package">Turnkey Façade Package</option>
           </select>
         </div>
 
         <div class="form-group">
           <label>Scope & Requirements</label>
-          <textarea rows="3" placeholder="Area in Sq. Ft., site location, estimated timeline..."></textarea>
+          <textarea id="modalBrief" rows="3" placeholder="Area in Sq. Ft., site location, estimated timeline..." maxlength="2500"></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px;">TRANSMIT PROJECT BRIEF</button>
+        <button type="submit" id="submitBtnModal" class="btn btn-primary" style="width: 100%; padding: 14px;">TRANSMIT PROJECT BRIEF</button>
       </form>
     </div>
   </div>
@@ -1246,6 +1270,12 @@
   <div id="toast" class="toast">Project brief transmitted successfully. Our estimation team will review your specifications.</div>
 
   <script>
+    // Initialize form security timestamps on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const now = Date.now().toString();
+      document.querySelectorAll('.form-ts').forEach(input => input.value = now);
+    });
+
     function toggleMobileMenu() {
       const menu = document.getElementById('mobileMenu');
       menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'block' : 'none';
@@ -1273,6 +1303,9 @@
     function openRfpModal() {
       document.getElementById('rfpModal').classList.add('active');
       document.body.style.overflow = 'hidden';
+      // Refresh modal timestamp
+      const modalTs = document.querySelector('#modalForm .form-ts');
+      if (modalTs) modalTs.value = Date.now().toString();
     }
 
     function closeRfpModal() {
@@ -1280,26 +1313,95 @@
       document.body.style.overflow = 'auto';
     }
 
-    function showToast(msg) {
+    function showToast(msg, isError = false) {
       const toast = document.getElementById('toast');
       if (msg) toast.innerText = msg;
+      toast.style.borderLeftColor = isError ? '#D9534F' : 'var(--color-blue)';
       toast.classList.add('show');
       setTimeout(() => {
         toast.classList.remove('show');
-      }, 4500);
+      }, 5500);
     }
 
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      showToast('Project brief received! Our engineering desk will connect shortly.');
-      e.target.reset();
+    async function sendRfp(payload, btnElement, formElement) {
+      const originalText = btnElement.innerText;
+      btnElement.innerText = 'VERIFYING & TRANSMITTING...';
+      btnElement.disabled = true;
+
+      try {
+        const response = await fetch('/api/rfp', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.error || 'Submission failed. Please check your connection.');
+        }
+
+        formElement.reset();
+        // Reset timestamp for subsequent submissions
+        const tsInput = formElement.querySelector('.form-ts');
+        if (tsInput) tsInput.value = Date.now().toString();
+
+        showToast(`✓ Brief Verified & Logged! Reference ID: ${data.referenceId}`);
+        return true;
+      } catch (err) {
+        showToast(err.message || 'Error transmitting brief. Please try again.', true);
+        return false;
+      } finally {
+        btnElement.innerText = originalText;
+        btnElement.disabled = false;
+      }
     }
 
-    function handleModalSubmit(e) {
+    async function handleFormSubmit(e) {
       e.preventDefault();
-      closeRfpModal();
-      showToast('Project brief transmitted successfully. Our team will review your drawings.');
-      e.target.reset();
+      const form = e.target;
+      const btn = document.getElementById('submitBtnMain');
+
+      const payload = {
+        _trap_fax: form.querySelector('[name="_trap_fax"]')?.value || '',
+        _form_ts: form.querySelector('[name="_form_ts"]')?.value || '',
+        contactPerson: document.getElementById('contactPerson').value,
+        companyName: document.getElementById('companyName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        projectType: document.getElementById('projectType').value,
+        siteLocation: document.getElementById('siteLocation').value,
+        scopeSqFt: document.getElementById('scopeSqFt').value,
+        timeline: document.getElementById('timeline').value,
+        projectBrief: document.getElementById('projectBrief').value
+      };
+
+      await sendRfp(payload, btn, form);
+    }
+
+    async function handleModalSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = document.getElementById('submitBtnModal');
+
+      const payload = {
+        _trap_fax: form.querySelector('[name="_trap_fax"]')?.value || '',
+        _form_ts: form.querySelector('[name="_form_ts"]')?.value || '',
+        contactPerson: document.getElementById('modalContactPerson').value,
+        companyName: document.getElementById('modalCompanyName').value,
+        email: document.getElementById('modalEmail').value,
+        phone: document.getElementById('modalPhone').value,
+        projectType: document.getElementById('modalProjectType').value,
+        projectBrief: document.getElementById('modalBrief').value
+      };
+
+      const success = await sendRfp(payload, btn, form);
+      if (success) {
+        closeRfpModal();
+      }
     }
   </script>
 </body>
